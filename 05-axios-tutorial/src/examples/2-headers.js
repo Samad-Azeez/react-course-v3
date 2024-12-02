@@ -8,7 +8,20 @@ const Headers = () => {
   const [joke, setJoke] = useState('random dad joke');
 
   const fetchDadJoke = async () => {
-    console.log('fetch dad joke');
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          Accept: 'application/json',
+        },
+      });
+
+      // destructure the joke from the response data object
+      const { data } = response;
+
+      setJoke(data.joke);
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 
   return (
