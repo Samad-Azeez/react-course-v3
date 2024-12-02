@@ -3,22 +3,17 @@
 ## Create New Next.js Project
 
 ```sh
-npx create-next-app@latest projectName
+npx create-next-app@14 projectName
 ```
 
 - choose typescript and eslint
 
 ## Assets
 
-- main course repo
-  - nextjs-jobify-app/assets
+- project repo
+  - 03-jobify/assets
 
-## Libraries
-
-```sh
-   npm install @clerk/nextjs@^4.27.7 @prisma/client@^5.7.0 @tanstack/react-query@^5.14.0 @tanstack/react-query-devtools@^5.14.0 dayjs@^1.11.10 next-themes@^0.2.1 recharts@^2.10.3
-   npm install prisma@^5.7.0 -D
-```
+In the starter project, TailwindCSS and DaisyUI are already installed and configured 👍
 
 ## shadcn/ui
 
@@ -28,13 +23,13 @@ npx create-next-app@latest projectName
 - open another terminal window (optional)
 
 ```sh
-npx shadcn-ui@latest init
+npx shadcn@latest init
 ```
 
 - setup Button
 
 ```sh
-npx shadcn-ui@latest add button
+npx shadcn@latest add button
 ```
 
 [Icons](https://lucide.dev/guide/packages/lucide-react)
@@ -457,7 +452,7 @@ export default Navbar;
 
 2. **Install the Dropdown-Menu Component:**
 
-   - Install it using `npx shadcn-ui@latest add dropdown-menu`
+   - Install it using `npx shadcn@latest add dropdown-menu`
 
 3. **Import necessary modules and components:**
 
@@ -485,7 +480,7 @@ export default Navbar;
 - [docs](https://ui.shadcn.com/docs/components/dropdown-menu)
 
 ```sh
-npx shadcn-ui@latest add dropdown-menu
+npx shadcn@latest add dropdown-menu
 ```
 
 LinksDropdown.tsx
@@ -675,7 +670,7 @@ export function ModeToggle() {
 - render in add-job/page.tsx
 
 ```sh
-npx shadcn-ui@latest add form input
+npx shadcn@latest add form input
 ```
 
 ```tsx
@@ -835,7 +830,7 @@ export type CreateAndEditJobType = z.infer<typeof createAndEditJobSchema>;
 - install
 
 ```sh
-npx shadcn-ui@latest add select
+npx shadcn@latest add select
 ```
 
 - [docs](https://ui.shadcn.com/docs/components/select)
@@ -1282,7 +1277,7 @@ export async function createJobAction(
 - install
 
 ```sh
-npx shadcn-ui@latest add toast
+npx shadcn@latest add toast
 
 ```
 
@@ -1761,7 +1756,7 @@ export default JobsList;
 - install
 
 ```sh
-npx shadcn-ui@latest add badge separator card
+npx shadcn@latest add badge separator card
 
 ```
 
@@ -2375,6 +2370,16 @@ function EditJobForm({ jobId }: { jobId: string }) {
 export default EditJobForm;
 ```
 
+## Important Info !!!
+
+If you decide to use my mock data (prisma/mock-data.js), first run this command:
+
+```sh
+node prisma/generate-data
+```
+
+This will generate jobs with the correct createdAt dates (within the last six months).
+
 ## Seed Database
 
 - create fake data in Mockaroo
@@ -2665,7 +2670,7 @@ export default StatsPage;
 - install
 
 ```sh
-npx shadcn-ui@latest add skeleton
+npx shadcn@latest add skeleton
 
 ```
 
