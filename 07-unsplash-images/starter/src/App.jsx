@@ -4,12 +4,11 @@ import ThemeToggle from './ThemeToggle';
 
 const App = () => {
   return (
-    <>
-      <h1>Unsplash Images Starter</h1>
-      <SearchForm />
+    <main>
       <ThemeToggle />
+      <SearchForm />
       <Gallery />
-    </>
+    </main>
   );
 };
 export default App;
