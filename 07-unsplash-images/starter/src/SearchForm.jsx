@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { toast } from 'react-toastify';
 
 const SearchForm = () => {
   const [searchValue, setSearchValue] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('submitted');
+    console.log(searchValue);
+    setSearchValue('');
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <input
@@ -18,6 +19,7 @@ const SearchForm = () => {
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
       />
+      <button type='submit'>Search</button>
     </form>
   );
 };
