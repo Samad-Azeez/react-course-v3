@@ -10,17 +10,23 @@ const SearchForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type='text'
-        name='search'
-        id=''
-        placeholder='cat'
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
-      />
-      <button type='submit'>Search</button>
-    </form>
+    <section>
+      <h1 className='title'>unsplash images</h1>
+      <form className='search-form' onSubmit={handleSubmit}>
+        <input
+          type='text'
+          className='form-input search-input'
+          name='search'
+          placeholder='cat'
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
+
+        <button type='submit' className='btn'>
+          Search
+        </button>
+      </form>
+    </section>
   );
 };
 
