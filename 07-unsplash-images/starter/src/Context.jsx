@@ -1,8 +1,11 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 
+// Create context for global state management
 const AppContext = createContext();
 
+// Provider component that wraps the app and provides theme context
 const AppProvider = ({ children }) => {
+  // State to track dark/light theme
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   /**
@@ -24,6 +27,7 @@ const AppProvider = ({ children }) => {
   );
 };
 
+// Custom hook to access the theme context
 const useGlobalContext = () => {
   return useContext(AppContext);
 };

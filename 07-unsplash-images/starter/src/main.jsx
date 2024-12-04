@@ -5,14 +5,14 @@ import './index.css';
 import { AppProvider } from './Context';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+// Initialize React Query client
 const queryClient = new QueryClient();
 
+// Render app with necessary providers
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  <QueryClientProvider client={queryClient}>
     <AppProvider>
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
+      <App />
     </AppProvider>
-  </React.StrictMode>
+  </QueryClientProvider>
 );
