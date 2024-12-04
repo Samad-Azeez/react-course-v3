@@ -4,7 +4,7 @@ import App from './App';
 import './index.css';
 import { AppProvider } from './Context';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 // Initialize React Query client
 const queryClient = new QueryClient();
 
@@ -13,6 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <QueryClientProvider client={queryClient}>
     <AppProvider>
       <App />
+      <ReactQueryDevtools initialIsOpen={false} />
     </AppProvider>
   </QueryClientProvider>
 );
