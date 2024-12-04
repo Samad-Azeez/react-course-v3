@@ -1,49 +1,61 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { useGlobalContext } from './Context';
 
-// Unsplash API endpoint with API key
+// Unsplash API configuration
+// Note: In production, API keys should be stored in environment variables
 const url =
-  'https://api.unsplash.com/search/photos?client_id=5r2HvWXNssCLvnpxFQeaU_pZwbxMRw1FZ6wQXu5ElFw&query=cat';
+  'https://api.unsplash.com/search/photos?client_id=5r2HvWXNssCLvnpxFQeaU_pZwbxMRw1FZ6wQXu5ElFw';
 
 const Gallery = () => {
-  // Fetch images using React Query
-  const response = useQuery({
-    queryKey: ['images'],
-    queryFn: () => axios.get(url),
+  // Get current search term from global context
+  const { searchValue } = useGlobalContext();
+
+  // React Query hook for handling API requests
+  // Will automatically refetch when searchValue changes
+  const { isLoading, isError, error, data } = useQuery({
+    queryKey: ['images', searchValue], // Cache key based on search term
+    queryFn: async () => {
+      const response = await axios.get(`${url}&query=${searchValue}`);
+      if (response.status !== 200) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.data;
+    },
   });
 
-  // Display loading state
-  if (response.isLoading) {
+  // Show loading state while fetching data
+  if (isLoading) {
     return (
-      <section className='image-container '>
+      <section className='image-container'>
         <h4>Loading...</h4>
       </section>
     );
   }
 
-  // Handle error state
-  if (response.isError) {
-    console.log(response.error);
+  // Show error state if request fails
+  if (isError) {
     return (
-      <section className='image-container '>
-        <h4>There was an error...</h4>
+      <section className='image-container'>
+        <h4>Error: {error.message || 'Something went wrong...'}</h4>
       </section>
     );
   }
 
-  // Extract results from response
-  const results = response.data?.data?.results || [];
+  // Extract image results from response
+  // Use empty array as fallback if data is undefined
+  const results = data?.results || [];
 
-  // Handle empty results
+  // Show message if no images found for search term
   if (results.length < 1) {
     return (
-      <section className='image-container '>
+      <section className='image-container'>
         <h4>No images found...</h4>
       </section>
     );
   }
 
-  // Render image gallery
+  // Render grid of images
   return (
     <section className='image-container'>
       {results.map((item) => {
