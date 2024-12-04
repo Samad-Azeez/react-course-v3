@@ -1,26 +1,22 @@
+/** Search form component */
 import { useState } from 'react';
 import { useGlobalContext } from './Context';
 
-// Component that handles the image search functionality
 const SearchForm = () => {
-  // State to manage the search input value
   const { searchValue, setSearchValue } = useGlobalContext();
+  const [searchTerm, setSearchTerm] = useState(searchValue);
 
-  const [searchTerm, setSearchTerm] = useState(searchValue); // Initialize with global value
-
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     const newValue = searchTerm.trim();
-    if (!newValue) return; // Prevent empty searches
+    if (!newValue) return;
     setSearchValue(newValue);
-    setSearchTerm(''); // Clear input after submission
+    setSearchTerm('');
   };
 
   return (
     <section>
       <h1 className='title'>unsplash images</h1>
-      {/* Search form with input and submit button */}
       <form className='search-form' onSubmit={handleSubmit}>
         <input
           type='text'

@@ -1,28 +1,32 @@
+/** App context for theme and search */
 import { createContext, useContext, useState, useEffect } from 'react';
 
-// Create context for global state management across the application
 const AppContext = createContext();
 
-// Provider component that wraps the app and manages global state
-const AppProvider = ({ children }) => {
-  // State for managing dark/light theme preference
-  // false = light theme (default), true = dark theme
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+// Get initial theme
+const getInitialDarkMode = () => {
+  const storedDarkMode = localStorage.getItem('dark-theme');
+  if (storedDarkMode !== null) {
+    return storedDarkMode === 'true';
+  }
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+};
 
-  // State for managing search query
-  // Initialize with 'cat' as default search term
+const AppProvider = ({ children }) => {
+  const [isDarkTheme, setIsDarkTheme] = useState(getInitialDarkMode());
   const [searchValue, setSearchValue] = useState('cat');
 
-  // Toggle function to switch between dark and light themes
-  // Also updates the DOM by adding/removing 'dark-theme' class on body
   const toggleDarkTheme = () => {
     const newDarkTheme = !isDarkTheme;
     setIsDarkTheme(newDarkTheme);
-    const body = document.querySelector('body');
-    body.classList.toggle('dark-theme', newDarkTheme);
+    localStorage.setItem('dark-theme', newDarkTheme);
   };
 
-  // Provide theme state and search state to all child components
+  // Apply theme
+  useEffect(() => {
+    document.querySelector('body').classList.toggle('dark-theme', isDarkTheme);
+  }, [isDarkTheme]);
+
   return (
     <AppContext.Provider
       value={{ isDarkTheme, toggleDarkTheme, searchValue, setSearchValue }}
@@ -32,10 +36,7 @@ const AppProvider = ({ children }) => {
   );
 };
 
-// Custom hook for consuming context values
-// Usage: const { isDarkTheme, toggleDarkTheme, searchValue, setSearchValue } = useGlobalContext();
-const useGlobalContext = () => {
-  return useContext(AppContext);
-};
+// Context hook
+const useGlobalContext = () => useContext(AppContext);
 
 export { AppProvider, useGlobalContext };
