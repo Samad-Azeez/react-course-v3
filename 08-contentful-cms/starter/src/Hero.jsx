@@ -13,7 +13,7 @@ const Hero = () => {
             mollitia nemo nostrum, est vero?
           </p>
         </div>
-        <div className='image-container'>
+        <div className='img-container'>
           <img src={heroImg} alt='woman and the browser' className='img' />
         </div>
       </div>
