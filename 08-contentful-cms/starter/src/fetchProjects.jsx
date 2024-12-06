@@ -41,6 +41,7 @@ const useFetchProjects = () => {
   return { loading, projects };
 };
 
+export { useFetchProjects };
 // debug code (commented out)
 // client.getEntries({ content_type: 'projects' }).then((response) => {
 //   console.log(response);
