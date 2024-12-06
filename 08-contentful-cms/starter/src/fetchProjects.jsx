@@ -5,7 +5,7 @@ import { createClient } from 'contentful';
 const client = createClient({
   space: 'f6gclpjtnunw',
   environment: 'master',
-  accessToken: 'YWlefzKfzdIdCa5N8_QCzzcHFfrv3u0bw4m3Dz-LIUY',
+  accessToken: import.meta.env.VITE_API_KEY,
 });
 
 // custom hook to fetch and manage projects data
