@@ -52,3 +52,21 @@ function checkName(name: string): boolean {
 }
 
 console.log(checkName('samad'));
+
+// Optional Parameters in TypeScript
+function calculatePrice(price: number, discount?: number): number {
+  return price - (discount || 0);
+}
+
+let priceAfterDiscount = calculatePrice(100, 20);
+
+// Default Parameters in TypeScript
+function calculateScore(
+  initialScore: number,
+  penaltyPoints: number = 0
+): number {
+  return initialScore - penaltyPoints;
+}
+
+let scoreAfterPenalty = calculateScore(100, 20);
+let scoreWithoutPenalty = calculateScore(300);
