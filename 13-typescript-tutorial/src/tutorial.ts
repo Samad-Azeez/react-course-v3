@@ -234,3 +234,85 @@ const deepWork: Book = {
 
 deepWork.printAuthor();
 console.log(deepWork.printTitle('Book Title:'));
+
+//interface challenge
+
+interface Computer {
+  readonly id: number;
+  brand: string;
+  ram: number;
+  storage?: number;
+  upgradeRam(amount: number): number;
+}
+
+const laptop1: Computer = {
+  id: 1,
+  brand: 'Dell',
+  ram: 8,
+  upgradeRam(amount) {
+    this.ram += amount;
+    return this.ram;
+  },
+};
+
+console.log(laptop1.upgradeRam(4));
+console.log(laptop1);
+
+// advanced interface in TypeScript\
+interface Person {
+  name: string;
+  getDetails(): string;
+}
+
+interface DogOwner {
+  dogName: string;
+  getDogDetails(): string;
+}
+
+interface Person {
+  age: number;
+}
+
+const person: Person = {
+  name: 'samad',
+  age: 20,
+  getDetails() {
+    return `Person: ${this.name}, Age: ${this.age}`;
+  },
+};
+
+// interface inheritance in TypeScript using extends keyword
+interface Employees extends Person {
+  employeeId: number;
+}
+
+const employee: Employees = {
+  employeeId: 1,
+  name: 'jane',
+  age: 30,
+  getDetails() {
+    return `Employee: ${this.name}, Age: ${this.age}, ID: ${this.employeeId}`;
+  },
+};
+
+console.log(employee.getDetails());
+
+// interface inheritance with multiple interfaces
+interface Managers extends Person, DogOwner {
+  managePeople(): void;
+}
+
+const manager: Managers = {
+  name: 'john',
+  age: 40,
+  dogName: 'buddy',
+  getDetails() {
+    return `Employee: ${this.name}, Age: ${this.age} }`;
+  },
+  getDogDetails() {
+    return `Dog: ${this.dogName}`;
+  },
+  managePeople() {
+    console.log('Managing people');
+  },
+};
