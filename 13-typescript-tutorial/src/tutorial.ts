@@ -70,3 +70,26 @@ function calculateScore(
 
 let scoreAfterPenalty = calculateScore(100, 20);
 let scoreWithoutPenalty = calculateScore(300);
+
+// Rest Parameters in TypeScript
+function sum(name: string, ...numbers: number[]): string {
+  const doubled = numbers.map((num: number) => num * 2);
+  console.log(doubled);
+
+  //  the reduce method is used to sum all the numbers in the array and return the total
+  let total = numbers.reduce((previous, current) => {
+    return previous + current;
+  }, 0);
+
+  return `${name} your total is ${total}`;
+}
+
+let result = sum('samad', 20, 30, 40, 50);
+console.log(result);
+
+// void type in TypeScript
+function logMessage(message: string): void {
+  console.log(message);
+}
+
+logMessage('Hello typescript');
