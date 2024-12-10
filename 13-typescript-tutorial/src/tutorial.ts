@@ -93,3 +93,61 @@ function logMessage(message: string): void {
 }
 
 logMessage('Hello typescript');
+
+// Union Types in TypeScript and type guards
+function processInput(value: string | number) {
+  if (typeof value === 'string') {
+    console.log(value.toUpperCase());
+  } else {
+    console.log(value * 2);
+  }
+}
+
+processInput('samad');
+
+// alternative way to define object as parameter in TypeScript
+function createStudent(student: { id: number; name: string }): void {
+  console.log(`Welcome ${student.name.toUpperCase()} !!!`);
+}
+
+createStudent({ id: 1, name: 'samad' });
+
+//  challenge to create a function that takes a string or number and returns the square of the number or reverse the string
+function processData(
+  input: string | number,
+  config: { reverse: boolean } = { reverse: false }
+): string | number {
+  if (typeof input === 'number') {
+    return input * input;
+  } else {
+    return config.reverse
+      ? input.toUpperCase().split('').reverse().join('')
+      : input.toUpperCase();
+  }
+}
+
+console.log(processData(10));
+console.log(processData('samad'));
+console.log(processData('samad', { reverse: true }));
+
+//  type aliases in TypeScript
+const john: { id: number; name: string; isActive: boolean } = {
+  id: 1,
+  name: 'john',
+  isActive: true,
+};
+const susan: { id: number; name: string; isActive: boolean } = {
+  id: 1,
+  name: 'susan',
+  isActive: false,
+};
+
+function createUser(user: { id: number; name: string; isActive: boolean }): {
+  id: number;
+  name: string;
+  isActive: boolean;
+} {
+  console.log(`Hello there ${user.name.toUpperCase()} !!!`);
+
+  return user;
+}
