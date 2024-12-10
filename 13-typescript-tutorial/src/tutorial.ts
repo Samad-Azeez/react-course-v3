@@ -131,23 +131,64 @@ console.log(processData('samad'));
 console.log(processData('samad', { reverse: true }));
 
 //  type aliases in TypeScript
-const john: { id: number; name: string; isActive: boolean } = {
+type User = { id: number; name: string; isActive: boolean };
+
+const john: User = {
   id: 1,
   name: 'john',
   isActive: true,
 };
-const susan: { id: number; name: string; isActive: boolean } = {
+const susan: User = {
   id: 1,
   name: 'susan',
   isActive: false,
 };
 
-function createUser(user: { id: number; name: string; isActive: boolean }): {
-  id: number;
-  name: string;
-  isActive: boolean;
-} {
+function createUser(user: User): User {
   console.log(`Hello there ${user.name.toUpperCase()} !!!`);
 
   return user;
 }
+
+// type aliases with union types
+type StringOrNumber = string | number;
+
+let value: StringOrNumber;
+value = 'samad';
+value = 20;
+
+// type aliases with literal types
+type Theme = 'light' | 'dark';
+
+let theme: Theme = 'light';
+
+function setTheme(theme: Theme): void {
+  console.log(`Theme set to ${theme}`);
+}
+
+setTheme('dark');
+
+type Employee = { id: number; name: string; department: string };
+type Manager = { id: number; name: string; employees: Employee[] };
+type Staff = Employee | Manager;
+
+// type aliases with intersection types
+function printStaffDetails(staff: Staff): void {
+  if ('employees' in staff) {
+    console.log(
+      `Manager ${staff.name} has ${staff.employees.length} employees`
+    );
+  } else {
+    console.log(
+      `Employee ${staff.name}, works in the ${staff.department} department`
+    );
+  }
+}
+
+const alice: Employee = { id: 1, name: 'alice', department: 'Sales' };
+const steve: Employee = { id: 2, name: 'Steve', department: 'HR' };
+
+const bob: Manager = { id: 1, name: 'bob', employees: [alice, steve] };
+
+printStaffDetails(alice);
+printStaffDetails(bob);
