@@ -172,7 +172,7 @@ type Employee = { id: number; name: string; department: string };
 type Manager = { id: number; name: string; employees: Employee[] };
 type Staff = Employee | Manager;
 
-// type aliases with intersection types
+// type aliases can be used to define complex types
 function printStaffDetails(staff: Staff): void {
   if ('employees' in staff) {
     console.log(
@@ -192,3 +192,45 @@ const bob: Manager = { id: 1, name: 'bob', employees: [alice, steve] };
 
 printStaffDetails(alice);
 printStaffDetails(bob);
+
+// type aliases with intersection types
+type Books = { id: number; name: string; price: number };
+type DiscountedBook = Books & { discount: number };
+
+const book1: Books = { id: 1, name: 'how to cook a dragon', price: 15 };
+const book2: Books = { id: 2, name: 'how to train your dragon', price: 20 };
+
+const discountedBook: DiscountedBook = {
+  id: 3,
+  name: 'shadow slave',
+  price: 31,
+  discount: 0.15,
+};
+
+// type aliases with interfaces
+
+interface Book {
+  readonly isbn: number;
+  title: string;
+  author: string;
+  genre?: string;
+  //   method
+  printAuthor(): void;
+  printTitle(message: string): string;
+}
+
+const deepWork: Book = {
+  isbn: 123,
+  title: 'Deep Work',
+  author: 'Cal Newport',
+  genre: 'Self-help',
+  printAuthor() {
+    console.log(this.author);
+  },
+  printTitle(message) {
+    return `${message} ${this.title}`;
+  },
+};
+
+deepWork.printAuthor();
+console.log(deepWork.printTitle('Book Title:'));
