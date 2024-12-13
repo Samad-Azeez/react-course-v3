@@ -169,14 +169,14 @@ function setTheme(theme: Theme): void {
 setTheme('dark');
 
 type Employee = { id: number; name: string; department: string };
-type Manager = { id: number; name: string; employees: Employee[] };
-type Staff = Employee | Manager;
+type Managing = { id: number; name: string; employees: Employee[] };
+type Staff = Employee | Managing;
 
 // type aliases can be used to define complex types
 function printStaffDetails(staff: Staff): void {
   if ('employees' in staff) {
     console.log(
-      `Manager ${staff.name} has ${staff.employees.length} employees`
+      `Managing ${staff.name} has ${staff.employees.length} employees`
     );
   } else {
     console.log(
@@ -188,7 +188,7 @@ function printStaffDetails(staff: Staff): void {
 const alice: Employee = { id: 1, name: 'alice', department: 'Sales' };
 const steve: Employee = { id: 2, name: 'Steve', department: 'HR' };
 
-const bob: Manager = { id: 1, name: 'bob', employees: [alice, steve] };
+const bob: Managing = { id: 1, name: 'bob', employees: [alice, steve] };
 
 printStaffDetails(alice);
 printStaffDetails(bob);
@@ -259,60 +259,123 @@ console.log(laptop1.upgradeRam(4));
 console.log(laptop1);
 
 // advanced interface in TypeScript\
+// interface Person {
+//   name: string;
+//   getDetails(): string;
+// }
+
+// interface DogOwner {
+//   dogName: string;
+//   getDogDetails(): string;
+// }
+
+// interface Person {
+//   age: number;
+// }
+
+// const person: Person = {
+//   name: 'samad',
+//   age: 20,
+//   getDetails() {
+//     return `Person: ${this.name}, Age: ${this.age}`;
+//   },
+// };
+
+// // interface inheritance in TypeScript using extends keyword
+// interface Employees extends Person {
+//   employeeId: number;
+// }
+
+// const employee: Employees = {
+//   employeeId: 1,
+//   name: 'jane',
+//   age: 30,
+//   getDetails() {
+//     return `Employee: ${this.name}, Age: ${this.age}, ID: ${this.employeeId}`;
+//   },
+// };
+
+// console.log(employee.getDetails());
+
+// // interface inheritance with multiple interfaces
+// interface Managers extends Person, DogOwner {
+//   managePeople(): void;
+// }
+
+// const manager: Managers = {
+//   name: 'john',
+//   age: 40,
+//   dogName: 'buddy',
+//   getDetails() {
+//     return `Employee: ${this.name}, Age: ${this.age} }`;
+//   },
+//   getDogDetails() {
+//     return `Dog: ${this.dogName}`;
+//   },
+//   managePeople() {
+//     console.log('Managing people');
+//   },
+// };
+
+// challenge
 interface Person {
   name: string;
-  getDetails(): string;
 }
 
-interface DogOwner {
+interface DogOwner extends Person {
   dogName: string;
-  getDogDetails(): string;
 }
 
-interface Person {
-  age: number;
-}
-
-const person: Person = {
-  name: 'samad',
-  age: 20,
-  getDetails() {
-    return `Person: ${this.name}, Age: ${this.age}`;
-  },
-};
-
-// interface inheritance in TypeScript using extends keyword
-interface Employees extends Person {
-  employeeId: number;
-}
-
-const employee: Employees = {
-  employeeId: 1,
-  name: 'jane',
-  age: 30,
-  getDetails() {
-    return `Employee: ${this.name}, Age: ${this.age}, ID: ${this.employeeId}`;
-  },
-};
-
-console.log(employee.getDetails());
-
-// interface inheritance with multiple interfaces
-interface Managers extends Person, DogOwner {
+interface Manager extends Person {
   managePeople(): void;
+  delegateTasks(): void;
 }
 
-const manager: Managers = {
-  name: 'john',
-  age: 40,
-  dogName: 'buddy',
-  getDetails() {
-    return `Employee: ${this.name}, Age: ${this.age} }`;
-  },
-  getDogDetails() {
-    return `Dog: ${this.dogName}`;
-  },
-  managePeople() {
-    console.log('Managing people');
-  },
-};
+function getEmployee(): Person | DogOwner | Manager {
+  const random = Math.random();
+
+  if (random < 0.33) {
+    return { name: 'samad' };
+  } else if (random < 0.66) {
+    return { name: 'samad', dogName: 'buddy' };
+  } else {
+    return {
+      name: 'samad',
+      managePeople: () => console.log('Managing people...'),
+      delegateTasks: () => console.log('Delegating tasks...'),
+    };
+  }
+}
+
+const employee: Person | DogOwner | Manager = getEmployee();
+
+console.log(employee);
+
+function isManager(obj: Person | DogOwner | Manager): obj is Manager {
+  return 'managePeople' in obj;
+}
+
+if (isManager(employee)) {
+  employee.delegateTasks();
+}
+
+// enum in typescript
+enum ServerResponseStatus {
+  Success = 200,
+  Error = 'Error',
+}
+
+interface ServerResponse {
+  result: ServerResponseStatus;
+  data: string[];
+}
+
+function getServerResponse(): ServerResponse {
+  return {
+    result: ServerResponseStatus.Success,
+    data: ['first item', 'second item'],
+  };
+}
+
+const response: ServerResponse = getServerResponse();
+console.log(response);
