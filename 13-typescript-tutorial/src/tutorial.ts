@@ -131,20 +131,20 @@ console.log(processData('samad'));
 console.log(processData('samad', { reverse: true }));
 
 //  type aliases in TypeScript
-type User = { id: number; name: string; isActive: boolean };
+type Users = { id: number; name: string; isActive: boolean };
 
-const john: User = {
+const john: Users = {
   id: 1,
   name: 'john',
   isActive: true,
 };
-const susan: User = {
+const susan: Users = {
   id: 1,
   name: 'susan',
   isActive: false,
 };
 
-function createUser(user: User): User {
+function createUser(user: Users): Users {
   console.log(`Hello there ${user.name.toUpperCase()} !!!`);
 
   return user;
@@ -365,6 +365,8 @@ enum ServerResponseStatus {
   Error = 'Error',
 }
 
+console.log(ServerResponseStatus);
+
 interface ServerResponse {
   result: ServerResponseStatus;
   data: string[];
@@ -379,3 +381,31 @@ function getServerResponse(): ServerResponse {
 
 const response: ServerResponse = getServerResponse();
 console.log(response);
+
+// enum challenge
+
+enum UserRole {
+  Admin,
+  Manager,
+  Employee,
+}
+
+type User = {
+  id: number;
+  name: string;
+  role: UserRole;
+  contact: readonly [email: string, phone: string];
+};
+
+function createUsers(userObj: User): User {
+  return userObj;
+}
+
+const result_2: User = createUsers({
+  id: 1,
+  name: 'John Doe',
+  role: UserRole.Admin,
+  contact: ['john.doe@example.com', '123-456-7890'],
+});
+
+console.log(result_2);
