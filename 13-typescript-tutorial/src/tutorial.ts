@@ -409,3 +409,8 @@ const result_2: User = createUsers({
 });
 
 console.log(result_2);
+
+//  Generics in TypeScript
+function identity<T>(arg: T): T {
+  return arg;
+}
