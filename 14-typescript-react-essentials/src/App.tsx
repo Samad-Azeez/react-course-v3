@@ -1,11 +1,9 @@
-import Component from './starter/02-props/index';
+import Component from './starter/03-state/index';
 
 function App() {
   return (
     <main>
-      <Component name='samad' id={123}>
-        Hello this is a child
-      </Component>
+      <Component />
     </main>
   );
 }

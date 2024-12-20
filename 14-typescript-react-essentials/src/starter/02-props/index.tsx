@@ -5,13 +5,13 @@ import { type PropsWithChildren } from 'react';
 //   id: number;
 //   children?: React.ReactNode;
 // }
-
 type ComponentProps = PropsWithChildren<{ name: string; id: number }>;
 
 // or you can also do this using interface
 // interface ComponentProps extends PropsWithChildren<{ name: string; id: number }> {}
 
-function Component({ name, id, children }: ComponentProps) {
+function Component(props: ComponentProps) {
+  const { name, id, children } = props;
   return (
     <div>
       <h1>Name:{name}</h1>
