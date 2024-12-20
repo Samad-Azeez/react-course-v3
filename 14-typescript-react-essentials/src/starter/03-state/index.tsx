@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 type Link = { id: number; url: string; text: string };
 
-const navlinks = [
+const navlinks: Link[] = [
   {
     id: 1,
     url: 'some url',
