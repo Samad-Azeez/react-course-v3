@@ -1,11 +1,11 @@
-import Component from './starter/05-challenge/index';
+import Component from './starter/06-context/index';
 
 function App() {
   return (
     <main>
       <h2>React & Typescript</h2>
-      <Component type='basic' name='samad' />
-      <Component type='advanced' name='ariel' email='ariel@gmail.com' />
+      <Component />
+      <Component />
     </main>
   );
 }
