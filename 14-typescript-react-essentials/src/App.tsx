@@ -5,7 +5,6 @@ function App() {
     <main>
       <h2>React & Typescript</h2>
       <Component />
-      <Component />
     </main>
   );
 }
